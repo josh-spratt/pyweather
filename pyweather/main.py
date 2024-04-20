@@ -1,5 +1,5 @@
-from api import WeatherLocation
-import json
+from forecaster import Forecaster
+from geolocator import Geolocator
 import textwrap
 
 
@@ -20,14 +20,15 @@ def print_msg_box(msg, indent=1, width=None, title=None):
 
 def main():
     address = input("Enter address for forecast...\n")
-    wl = WeatherLocation(address=address)
-    wl.get_coordinates()
-    wl.get_forecast_url()
-    wl.get_forecast()
+    location = Geolocator(address=address)
+    location.get_coordinates()
+    forecast = Forecaster(latitude=location.latitude, longitude=location.longitude)
+    forecast.get_forecast_url()
+    forecast.get_forecast()
 
-    forecasts = [x for x in wl.forecast_data["properties"]["periods"]]
+    forecasts = [x for x in forecast.forecast_data["properties"]["periods"]]
 
-    wrapper = textwrap.TextWrapper(width=50) 
+    wrapper = textwrap.TextWrapper(width=50)
 
     for forecast in forecasts:
         number = forecast["number"]
@@ -35,7 +36,6 @@ def main():
         temperature = forecast["temperature"]
         short_forecast = forecast["shortForecast"]
         detailed_forecast = wrapper.fill(text=forecast["detailedForecast"])
-
         str_to_log = (
             "number: "
             + str(number)
