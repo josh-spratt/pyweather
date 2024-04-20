@@ -1,3 +1,22 @@
+[project]
+name = "pyweather"
+version = "0.1.0"
+authors = [
+  { name="Joshua Spratt", email="jspratt02@icloud.com" },
+]
+description = "A tool for checking the weather forecast."
+readme = "README.md"
+requires-python = ">=3.8"
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "License :: OSI Approved :: Apache Software License",
+    "Operating System :: OS Independent",
+]
+
+[project.urls]
+Homepage = "https://github.com/josh-spratt/pyweather"
+Issues = "https://github.com/josh-spratt/pyweather/issues"
+
 [tool.poetry]
 name = "pyweather"
 version = "0.1.0"
@@ -9,8 +28,9 @@ readme = "README.md"
 [tool.poetry.dependencies]
 python = "^3.10"
 requests = "^2.31.0"
-
+hatchling = "^1.24.1"
+build = "^1.2.1"
 
 [build-system]
-requires = ["poetry-core"]
-build-backend = "poetry.core.masonry.api"
+requires = ["hatchling"]
+build-backend = "hatchling.build"
